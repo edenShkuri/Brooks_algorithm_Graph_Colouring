@@ -115,7 +115,7 @@ public class Undirected_Graph {
         return bfs_order;
     }
 
-    private int getMaxDegree() {
+    public int getMaxDegree() {
         int max=0;
         for (NodeData n:get_all_V()){
             int size=edges.get(n.getKey()).size();

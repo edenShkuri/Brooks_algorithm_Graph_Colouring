@@ -1,10 +1,10 @@
+import javax.swing.*;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Brooks_algo {
 
-    public static int Colouring_By_Brooks(Undirected_Graph g){
+    public static int Colouring_By_Brooks(Undirected_Graph g, JFrame f) throws InterruptedException {
         List<NodeData> BFS=g.BFS_order();
         Collections.reverse(BFS);
 
@@ -31,11 +31,13 @@ public class Brooks_algo {
                 MaxColor++;
                 node.setColor(MaxColor);
             }
+            f.repaint();
+            Thread.sleep(1000);
         }
         return MaxColor;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Undirected_Graph g=new Undirected_Graph();
         for (int i=1; i<16; i++){
             g.addNode(new NodeData(i));
@@ -61,24 +63,15 @@ public class Brooks_algo {
         g.addEdge(10,15);
         g.addEdge(10,11);
 
-        int MaxColor=Colouring_By_Brooks(g);
-
+        JFrame f = new JFrame();
+        f.setSize(600, 500);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(new ColouringGui(g));
+        f.pack();
+        f.setVisible(true);
+        Thread.sleep(1000);
+        int MaxColor=Brooks_algo.Colouring_By_Brooks(g, f);
         g.PrintByColor(MaxColor);
-
-
-
-//        g.addEdge(0,3);
-//        g.addEdge(3,7);
-//        g.addEdge(5,7);
-//        g.addEdge(5,6);
-//        g.addEdge(6,4);
-//        g.addEdge(6,1);
-//        g.addEdge(5,2);
-//        g.addEdge(1,2);
-//        g.addEdge(2,4);
-//        g.addEdge(6,7);
-
-
 
     }
 }
