@@ -32,14 +32,15 @@ public class Brooks_algo {
                 node.setColor(MaxColor);
             }
             f.repaint();
-            Thread.sleep(1000);
+            Thread.sleep(500);
+
         }
         return MaxColor;
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static Undirected_Graph CreateBigGraph(){
         Undirected_Graph g=new Undirected_Graph();
-        for (int i=1; i<16; i++){
+        for (int i=1; i<=20; i++){
             g.addNode(new NodeData(i));
         }
 
@@ -62,14 +63,53 @@ public class Brooks_algo {
         g.addEdge(9,15);
         g.addEdge(10,15);
         g.addEdge(10,11);
+        g.addEdge(16,20);
+        g.addEdge(16,17);
+        g.addEdge(16,11);
+        g.addEdge(17,12);
+        g.addEdge(17, 18);
+        g.addEdge(18,13);
+        g.addEdge(18,19);
+        g.addEdge(19,20);
+        g.addEdge(19,14);
+        g.addEdge(20,15);
+
+        g.getNode(1).setP(395, 210);
+        g.getNode(2).setP(360, 290);
+        g.getNode(3).setP(505, 210);
+        g.getNode(4).setP(450, 360);
+        g.getNode(5).setP(540, 290);
+        g.getNode(6).setP(580, 170);
+        g.getNode(7).setP(620, 320);
+        g.getNode(8).setP(450, 430);
+        g.getNode(9).setP(290, 330);
+        g.getNode(10).setP(350, 170);
+        g.getNode(11).setP(450, 100);
+        g.getNode(12).setP(680, 220);
+        g.getNode(13).setP(600, 440);
+        g.getNode(14).setP(320, 440);
+        g.getNode(15).setP(240, 220);
+        g.getNode(16).setP(450, 40);
+        g.getNode(17).setP(775, 200);
+        g.getNode(18).setP(660, 515);
+        g.getNode(19).setP(260, 515);
+        g.getNode(20).setP(145, 200);
+
+
+        return g;
+
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Undirected_Graph g=CreateBigGraph();
 
         JFrame f = new JFrame();
-        f.setSize(600, 500);
+        f.setSize(1500, 500);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(new ColouringGui(g));
         f.pack();
         f.setVisible(true);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         int MaxColor=Brooks_algo.Colouring_By_Brooks(g, f);
         g.PrintByColor(MaxColor);
 
