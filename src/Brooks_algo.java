@@ -95,9 +95,7 @@ public class Brooks_algo {
         g.getNode(19).setP(260, 515);
         g.getNode(20).setP(145, 200);
 
-
         return g;
-
     }
 
     public static void main(String[] args) throws InterruptedException {

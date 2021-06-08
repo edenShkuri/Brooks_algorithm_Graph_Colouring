@@ -17,6 +17,7 @@ public class ColouringGui extends JPanel {
     private Color Colors[];
     JButton button;
     boolean flag;
+    int maxDeg;
 
     public ColouringGui(Undirected_Graph gr) {
         super(true);
@@ -37,6 +38,7 @@ public class ColouringGui extends JPanel {
         if(firstNode.getP().getX()!=0 && firstNode.getP().getY()!=0){
             flag = true;
         }else{flag=false;}
+        maxDeg=graph.getMaxDegree();
     }
 
 
@@ -66,6 +68,15 @@ public class ColouringGui extends JPanel {
             drawNodes(g2d, r2, m, r);
             drawEdges(g2d);
         }
+        Font f=new Font("SansSerif", Font.BOLD,22);
+        g2d.setFont(f);
+        g2d.drawString("Δ is "+maxDeg, 755, 100);
+        g2d.drawString("number of colors-> "+(Colors.length-1), 755, 140);
+
+        g.setColor(Colors[1]);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRect(735, 70, 250, 80);
+
     }
 
     private void drawEdges(Graphics2D g2d) {
