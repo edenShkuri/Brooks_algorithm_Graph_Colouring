@@ -45,8 +45,6 @@ public class ColouringGui extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paintComponent(g);
-        System.out.println("w= "+this.getWidth()+", h= "+this.getHeight());
-
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,

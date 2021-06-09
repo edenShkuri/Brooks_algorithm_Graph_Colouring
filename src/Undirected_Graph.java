@@ -91,7 +91,6 @@ public class Undirected_Graph {
         for (NodeData n:get_all_V()){
             if(edges.get(n.getKey()).size()<getMaxDegree()){
                 startNode=n;
-                System.out.println("start node-> "+n.getKey());
                 break;
             }
         }
