@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Brooks_algo {
 
@@ -98,9 +100,55 @@ public class Brooks_algo {
         return g;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        Undirected_Graph g=CreateBigGraph();
+    /**
+     * Create random graph such that not all nodes had same degree
+     * NOTE: if E > V*(V-1), throw exception.
+     *
+     * @param V - Sum of nodes.
+     * @param E - Sum of edges.
+     * @return Undirected Graph.
+     */
+    public static Undirected_Graph graphCreator(int V, int E){
+        if(E > V*(V-1)){ throw new IndexOutOfBoundsException("This graph, with "+V+" nodes cannot have "+E+" edges");}
+        Undirected_Graph g = new Undirected_Graph();
+        //Add nodes to the graph
+        for(int i = 0;i<V;++i){
+            g.addNode(new NodeData());
+        }
+        List<NodeData> nodes = new LinkedList<>(g.get_all_V());
+        //Connect all node to the next node to ensure connectivity
+        for(int i = 0;i<nodes.size()-1;++i){
+            g.addEdge(nodes.get(i).getKey(),nodes.get((i+1)).getKey());
+        }
 
+        Random r = new Random();
+        //Connect more random edges to the graph
+        while(g.getSumOfEdges() < E){
+            int src = r.nextInt(nodes.size());
+            int dest = r.nextInt(nodes.size());
+            while(src == dest){
+                dest = r.nextInt(nodes.size());
+            }
+            if(g.getEdge(src,dest) == null) {
+                g.addEdge(src,dest);
+            }
+        }
+        int maxDegree = g.getMaxDegree();
+        for(List<edgeData> l : g.edges.values()){
+            if(l.size() < maxDegree){
+                return g;
+            }
+        }
+        //If the for loop above don't return g, so all nodes add same degree.
+        //Get first edge from first node and remove it.
+        edgeData e = g.edges.values().stream().findFirst().get().stream().findFirst().get();
+        g.removeEdge(e.getSrc(),e.getDest());
+
+        return g;
+    }
+    public static void main(String[] args) throws InterruptedException {
+//        Undirected_Graph g=CreateBigGraph();
+        Undirected_Graph g= graphCreator(15,35);
         JFrame f = new JFrame();
         f.setSize(1500, 500);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -2,6 +2,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Node;
 
+import java.security.MessageDigest;
 import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -72,7 +73,13 @@ public class Undirected_Graph {
         }
         return null;
     }
-
+    public int getSumOfEdges(){
+        int n = 0;
+        for(List<edgeData> l : edges.values()){
+            n+=l.size();
+        }
+        return n/2;
+    }
     public Collection<NodeData> getNi(NodeData n) {
         Collection<NodeData> res = new HashSet<>();
         for (edgeData e : this.get_all_E(n.getKey())) {
