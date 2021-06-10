@@ -90,16 +90,16 @@ public class Brooks_algo {
     }
     public static void main(String[] args) throws InterruptedException {
 //        Undirected_Graph g=CreateBigGraph();
-//        Undirected_Graph g= graphCreator(15,35);
-        Undirected_Graph g=new Undirected_Graph();
-        g.load("Graphs/Graphs_with_Points/Rocket.json");
+        Undirected_Graph g= graphCreator(20,45);
+//        Undirected_Graph g=new Undirected_Graph();
+//        g.load("Graphs/Graphs_with_Points/Rocket.json");
         JFrame f = new JFrame();
         f.setSize(1500, 500);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(new ColouringGui(g));
         f.pack();
         f.setVisible(true);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         int MaxColor=Brooks_algo.Colouring_By_Brooks(g, f);
         g.PrintByColor(MaxColor);
 
