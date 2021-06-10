@@ -120,7 +120,6 @@ public class ColouringGui extends JPanel {
             double t = 2 * Math.PI * i / n;
             int x = (int) Math.round(a + r * Math.cos(t));
             int y = (int) Math.round(b + r * Math.sin(t));
-            System.out.println("2 * r2= "+2 * r2);
             g2d.fillOval(x - r2, y - r2, 2 * r2, 2 * r2);
             g2d.setColor(Color.BLACK);
             int px, py;
