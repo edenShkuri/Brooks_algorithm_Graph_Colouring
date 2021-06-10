@@ -1,30 +1,24 @@
-import org.w3c.dom.Node;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.Random;
 
 public class ColouringGui extends JPanel {
 
-    private static final int SIZE = 1000;
+    private static final int SIZE = 650;
     private int a = SIZE / 2;
     private int b = a;
     private int r = 4 * SIZE / 5;
     private int n;
-    private Undirected_Graph graph;
-    private int numberOfColors;
-    private Color Colors[];
-    JButton button;
+    private final Undirected_Graph graph;
+    private Color[] Colors;
     boolean flag;
     int maxDeg;
 
     public ColouringGui(Undirected_Graph gr) {
         super(true);
-        this.setPreferredSize(new Dimension(SIZE, SIZE));
+        this.setPreferredSize(new Dimension(SIZE+350, SIZE));
         n=gr.get_all_V().size();
         graph=gr;
-//        numberOfColors=graph.getMaxDegree();
         maxDeg=graph.getMaxDegree();
         Colors=new Color[maxDeg+1];
         Colors[0]=Color.white;
@@ -36,9 +30,7 @@ public class ColouringGui extends JPanel {
             Colors[i]=new Color(r,g,b);
         }
         NodeData firstNode=graph.get_all_V().stream().findFirst().get();
-        if(firstNode.getP().getX()!=0 && firstNode.getP().getY()!=0){
-            flag = true;
-        }else{flag=false;}
+        flag = firstNode.getP().getX() != 0 && firstNode.getP().getY() != 0;
     }
 
 
@@ -54,16 +46,13 @@ public class ColouringGui extends JPanel {
         b = getHeight() / 2;
         int m = Math.min(a, b);
         r = 4 * m / 5;
-        int r2 = Math.abs(m - r) / 2 ;
-//        g2d.drawOval(a - r, b - r, 2 * r, 2 * r);
-
         g2d.setStroke(new BasicStroke(2));
         if(flag){
             drawEdges(g2d);
             drawNodesWithLocations(g2d);
 
         }else {
-            drawNodes(g2d, r2, m, r);
+            drawNodes(g2d, m, r);
             drawEdges(g2d);
         }
         Font f=new Font("SansSerif", Font.BOLD,22);
@@ -71,9 +60,8 @@ public class ColouringGui extends JPanel {
         g2d.drawString("Δ is "+maxDeg, 755, 100);
         g2d.drawString("number of colors-> "+graph.getMaxColor(), 755, 140);
 
-//        g.setColor(Colors[1]);
         g2d.setStroke(new BasicStroke(3));
-        g2d.drawRect(735, 70, 250, 80);
+        g2d.drawRect(735, 70, 260, 80);
 
         g2d.drawString("The colors:", 840, 200);
 
@@ -112,8 +100,8 @@ public class ColouringGui extends JPanel {
         }
     }
 
-    private void drawNodes(Graphics2D g2d, int r2, int m, int r) {
-        r2=20;
+    private void drawNodes(Graphics2D g2d, int m, int r) {
+        int r2=20;
         int i=0;
         for(NodeData node: graph.get_all_V()){
             g2d.setColor(Colors[node.getColor()]);
@@ -125,6 +113,7 @@ public class ColouringGui extends JPanel {
             int px, py;
             int d= (int)Math.sqrt((x-m)*(x-m)+(y-m)*(y-m));
             int k= d-r2;
+            if(d==0){d=1;}
             px=(m*r2+x*k)/(d);
             py=(m*r2+y*k)/(d);
             node.setP(px, py);

@@ -1,8 +1,5 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Node;
-
-import java.security.MessageDigest;
 import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -254,15 +251,15 @@ public class Undirected_Graph {
 
     @Override
     public String toString() {
-        String s = "Graph:\n";
+        StringBuilder s = new StringBuilder("Graph:\n");
         for(int key : this.edges.keySet()){
-            s+="key: "+key+" | ";
+            s.append("key: ").append(key).append(" | ");
 
             for(edgeData e : edges.get(key)){
-                s+=""+e.getDest()+" ";
+                s.append("").append(e.getDest()).append(" ");
             }
-            s+="\n";
+            s.append("\n");
         }
-        return s;
+        return s.toString();
     }
 }
