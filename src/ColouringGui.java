@@ -71,9 +71,16 @@ public class ColouringGui extends JPanel {
         g2d.drawString("Δ is "+maxDeg, 755, 100);
         g2d.drawString("number of colors-> "+(Colors.length-1), 755, 140);
 
-        g.setColor(Colors[1]);
+//        g.setColor(Colors[1]);
         g2d.setStroke(new BasicStroke(3));
         g2d.drawRect(735, 70, 250, 80);
+
+        g2d.drawString("The colors:", 840, 200);
+
+        for (int i=1; i<Colors.length; i++){
+            g2d.setColor(Colors[i]);
+            g2d.fillRect(855, 220+(i-1)*30, 100, 20);
+        }
 
     }
 
