@@ -24,11 +24,12 @@ public class ColouringGui extends JPanel {
         this.setPreferredSize(new Dimension(SIZE, SIZE));
         n=gr.get_all_V().size();
         graph=gr;
-        numberOfColors=graph.getMaxDegree();
-        Colors=new Color[numberOfColors+1];
+//        numberOfColors=graph.getMaxDegree();
+        maxDeg=graph.getMaxDegree();
+        Colors=new Color[maxDeg+1];
         Colors[0]=Color.white;
         Random generator = new Random(8);
-        for(int i=1; i<=numberOfColors; i++){
+        for(int i=1; i<=maxDeg; i++){
             int r=(int)(generator.nextDouble() * (255));
             int g=(int)(generator.nextDouble() * (255));
             int b=(int)(generator.nextDouble() * (255));
@@ -38,7 +39,6 @@ public class ColouringGui extends JPanel {
         if(firstNode.getP().getX()!=0 && firstNode.getP().getY()!=0){
             flag = true;
         }else{flag=false;}
-        maxDeg=graph.getMaxDegree();
     }
 
 
@@ -69,7 +69,7 @@ public class ColouringGui extends JPanel {
         Font f=new Font("SansSerif", Font.BOLD,22);
         g2d.setFont(f);
         g2d.drawString("Δ is "+maxDeg, 755, 100);
-        g2d.drawString("number of colors-> "+(Colors.length-1), 755, 140);
+        g2d.drawString("number of colors-> "+graph.getMaxColor(), 755, 140);
 
 //        g.setColor(Colors[1]);
         g2d.setStroke(new BasicStroke(3));
@@ -77,7 +77,8 @@ public class ColouringGui extends JPanel {
 
         g2d.drawString("The colors:", 840, 200);
 
-        for (int i=1; i<Colors.length; i++){
+        int maxColor=graph.getMaxColor();
+        for (int i=1; i<=maxColor; i++){
             g2d.setColor(Colors[i]);
             g2d.fillRect(855, 220+(i-1)*30, 100, 20);
         }

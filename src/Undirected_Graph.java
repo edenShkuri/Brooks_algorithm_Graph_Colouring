@@ -12,10 +12,12 @@ import java.util.*;
 public class Undirected_Graph {
     HashMap<Integer, NodeData> vertices;
     HashMap<Integer, List<edgeData>> edges;
+    private int MaxColor;
 
     public Undirected_Graph() {
         vertices = new HashMap<>();
         edges = new HashMap<>();
+        MaxColor=0;
     }
 
     public NodeData getNode(int key) {
@@ -93,6 +95,14 @@ public class Undirected_Graph {
             n.setColor(0);
             n.setTag(0);
         }
+    }
+
+    public void setMaxColor(int i){
+        MaxColor=i;
+    }
+
+    public int getMaxColor(){
+        return MaxColor;
     }
 
 
